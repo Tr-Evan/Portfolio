@@ -1,0 +1,269 @@
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap');
+@import "tailwindcss";
+
+/* ─── Design tokens ─────────────────────────────────────────── */
+:root {
+  /* Background layers */
+  --bg:         #09090e;
+  --surface:    #111118;
+  --card:       #14141c;
+  --card-hover: #17171f;
+
+  /* Borders */
+  --border:        rgba(255, 255, 255, 0.07);
+  --border-strong: rgba(255, 255, 255, 0.12);
+
+  /* Text */
+  --fg:      #f0f0f8;
+  --fg-2:    #8888a8;
+  --fg-3:    #55556a;
+
+  /* Accent — soft violet */
+  --accent:       #8b7cf8;
+  --accent-dim:   rgba(139, 124, 248, 0.12);
+  --accent-border:rgba(139, 124, 248, 0.25);
+
+  /* Ease */
+  --ease: cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* Fonts */
+  --font-head: 'Syne', sans-serif;
+  --font-body: 'Inter', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+}
+
+/* light theme removed — dark only */
+
+/* ─── Reset ──────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-body);
+  font-size: 15px;
+  line-height: 1.65;
+  overflow-x: hidden;
+}
+
+#root { width: 100%; max-width: 100%; text-align: left; }
+
+/* ─── Scrollbar ──────────────────────────────────────────────── */
+::-webkit-scrollbar { width: 3px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--border-strong); border-radius: 2px; }
+
+
+/* ─── Typography ─────────────────────────────────────────────── */
+h1, h2, h3 { font-family: var(--font-head); color: var(--fg); }
+
+.label {
+  font-size: 11px;
+  font-family: var(--font-mono);
+  letter-spacing: 0.12em;
+  color: var(--fg-3);
+  text-transform: uppercase;
+}
+
+/* ─── Layout ─────────────────────────────────────────────────── */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 32px;
+}
+
+/* ─── Card ───────────────────────────────────────────────────── */
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  transition: background .25s var(--ease), border-color .25s var(--ease), box-shadow .25s var(--ease);
+}
+
+.card:hover {
+  background: var(--card-hover);
+  border-color: var(--border-strong);
+}
+
+/* ─── Subtle divider ─────────────────────────────────────────── */
+.divider {
+  height: 1px;
+  background: var(--border);
+}
+
+/* ─── Accent pill / tag ──────────────────────────────────────── */
+.pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 10px;
+  border-radius: 100px;
+  font-size: 12px;
+  font-family: var(--font-mono);
+  background: var(--accent-dim);
+  border: 1px solid var(--accent-border);
+  color: var(--accent);
+  font-weight: 500;
+}
+
+.tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 10px;
+  border-radius: 100px;
+  font-size: 11px;
+  font-family: var(--font-mono);
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--fg-3);
+  transition: border-color .2s, color .2s, background .2s;
+  cursor: pointer;
+}
+
+.tag:hover, .tag.active {
+  border-color: var(--accent-border);
+  color: var(--accent);
+  background: var(--accent-dim);
+}
+
+/* ─── Buttons ────────────────────────────────────────────────── */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  border-radius: 10px;
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--bg);
+  background: var(--fg);
+  border: none;
+  cursor: pointer;
+  transition: opacity .2s, transform .15s;
+}
+
+.btn-primary:hover  { opacity: 0.88; transform: translateY(-1px); }
+.btn-primary:active { transform: translateY(0); opacity: 0.75; }
+
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 18px;
+  border-radius: 10px;
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--fg-2);
+  background: transparent;
+  border: 1px solid var(--border);
+  cursor: pointer;
+  transition: color .2s, border-color .2s, background .2s;
+}
+
+.btn-ghost:hover {
+  color: var(--fg);
+  border-color: var(--border-strong);
+  background: rgba(255,255,255,0.03);
+}
+
+/* ─── Skill bar ──────────────────────────────────────────────── */
+.skill-track {
+  height: 2px;
+  background: var(--border);
+  border-radius: 99px;
+  overflow: hidden;
+}
+
+.skill-fill {
+  height: 100%;
+  border-radius: 99px;
+  background: var(--fg);
+  transform-origin: left;
+}
+
+/* ─── Form ───────────────────────────────────────────────────── */
+.input {
+  width: 100%;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  color: var(--fg);
+  padding: 13px 15px;
+  font-family: var(--font-body);
+  font-size: 14px;
+  outline: none;
+  transition: border-color .2s, box-shadow .2s;
+}
+
+.input::placeholder { color: var(--fg-3); }
+
+.input:focus {
+  border-color: var(--accent-border);
+  box-shadow: 0 0 0 3px var(--accent-dim);
+}
+
+/* ─── Animations ─────────────────────────────────────────────── */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-8px); }
+}
+
+.float { animation: float 5s ease-in-out infinite; }
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0; }
+}
+
+.blink { animation: blink 1s step-end infinite; }
+
+/* ─── Gradient text ──────────────────────────────────────────── */
+.grad {
+  background: linear-gradient(135deg, var(--fg) 30%, var(--accent));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ─── Responsive layout helpers ─────────────────────────────── */
+.two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 56px;
+}
+.two-col-right {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 56px;
+}
+
+/* Passions — uniform 3-col grid */
+.passions-grid-uniform {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+/* Hero profile card — hide on small screens */
+.hero-stats-card { display: block; }
+
+@media (max-width: 960px) {
+  .container        { padding: 0 24px; }
+  .two-col          { grid-template-columns: 1fr; gap: 40px; }
+  .two-col-right    { grid-template-columns: 1fr; gap: 32px; }
+  .hero-grid        { grid-template-columns: 1fr !important; }
+  .hero-stats-card  { display: none !important; }
+  .passions-grid-uniform { grid-template-columns: repeat(2, 1fr) !important; }
+}
+
+@media (max-width: 600px) {
+  .container { padding: 0 16px; }
+  section    { padding-top: 72px !important; padding-bottom: 72px !important; }
+  .two-col   { gap: 28px; }
+  .passions-grid-uniform { grid-template-columns: 1fr 1fr !important; }
+}
+
+@media (max-width: 420px) {
+  .passions-grid-uniform { grid-template-columns: 1fr !important; }
+}
