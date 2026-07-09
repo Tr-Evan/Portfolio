@@ -80,7 +80,7 @@ export default function PageLoader({ onDone }: PageLoaderProps) {
                   letterSpacing: '-0.025em', marginBottom: 4,
                 }}
               >
-                Alex Renard
+                Evan Troget
               </motion.p>
               <motion.p
                 initial={{ opacity: 0 }}
@@ -92,7 +92,7 @@ export default function PageLoader({ onDone }: PageLoaderProps) {
                   letterSpacing: '0.12em',
                 }}
               >
-                PORTFOLIO 2024
+                PORTFOLIO 2026
               </motion.p>
             </div>
           </motion.div>

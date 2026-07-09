@@ -24,7 +24,7 @@ export default function Footer() {
           {/* Brand */}
           <div>
             <p style={{ fontFamily: 'var(--font-head)', fontWeight: 700, fontSize: 16, color: 'var(--fg)', marginBottom: 10, letterSpacing: '-0.01em' }}>
-              Alex Renard
+              Evan Troget
             </p>
             <p style={{ fontSize: 13, color: 'var(--fg-3)', lineHeight: 1.7, maxWidth: 240 }}>
               Développeur Fullstack passionné par les interfaces modernes et performantes.
@@ -82,7 +82,7 @@ export default function Footer() {
         {/* Bottom bar */}
         <div style={{ borderTop: '1px solid var(--border)', paddingTop: 24, display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: 16, flexWrap: 'wrap' }}>
           <p style={{ fontSize: 12, color: 'var(--fg-3)' }}>
-            © 2024 Alex Renard — Fait avec React & TypeScript
+            © 2026 Evan Troget — Fait avec React & TypeScript
           </p>
           <motion.button
             onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}

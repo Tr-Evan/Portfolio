@@ -90,72 +90,67 @@ export default function DarkVeil({
   speed = 0.5,
   scanlineFrequency = 0,
   warpAmount = 0,
-  resolutionScale = 1,
+  resolutionScale = 1
 }: Props) {
-  const canvasRef = useRef<HTMLCanvasElement>(null);
-
+  const ref = useRef<HTMLCanvasElement>(null);
   useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
+    const canvas = ref.current as HTMLCanvasElement;
+    const parent = canvas.parentElement as HTMLElement;
 
-    const renderer = new Renderer({ dpr: Math.min(window.devicePixelRatio, 2), canvas });
-    const gl = renderer.gl;
-
-    const geometry = new Triangle(gl);
-    const program = new Program(gl, {
-      vertex, fragment,
-      uniforms: {
-        uTime:       { value: 0 },
-        uResolution: { value: new Vec2(1, 1) },
-        uHueShift:   { value: hueShift },
-        uNoise:      { value: noiseIntensity },
-        uScan:       { value: scanlineIntensity },
-        uScanFreq:   { value: scanlineFrequency },
-        uWarp:       { value: warpAmount },
-      },
+    const renderer = new Renderer({
+      dpr: Math.min(window.devicePixelRatio, 2),
+      canvas
     });
+
+    const gl = renderer.gl;
+    const geometry = new Triangle(gl);
+
+    const program = new Program(gl, {
+      vertex,
+      fragment,
+      uniforms: {
+        uTime: { value: 0 },
+        uResolution: { value: new Vec2() },
+        uHueShift: { value: hueShift },
+        uNoise: { value: noiseIntensity },
+        uScan: { value: scanlineIntensity },
+        uScanFreq: { value: scanlineFrequency },
+        uWarp: { value: warpAmount }
+      }
+    });
+
     const mesh = new Mesh(gl, { geometry, program });
 
-    // Use window dimensions: the shader is always a full-screen background.
-    // Avoid parent.offsetHeight which can be 0 for absolutely-positioned containers.
     const resize = () => {
-      const w = window.innerWidth;
-      const h = window.innerHeight;
-      renderer.setSize(Math.round(w * resolutionScale), Math.round(h * resolutionScale));
+      const w = parent.clientWidth,
+        h = parent.clientHeight;
+      renderer.setSize(w * resolutionScale, h * resolutionScale);
       program.uniforms.uResolution.value.set(w, h);
-      // Keep canvas CSS size in sync (it may differ from pixel size)
-      canvas.style.width  = '100%';
-      canvas.style.height = '100%';
     };
 
     window.addEventListener('resize', resize);
-    resize(); // call immediately — window dims are always available
+    resize();
 
     const start = performance.now();
-    let raf = 0;
+    let frame = 0;
+
     const loop = () => {
-      program.uniforms.uTime.value      = ((performance.now() - start) / 1000) * speed;
-      program.uniforms.uHueShift.value  = hueShift;
-      program.uniforms.uNoise.value     = noiseIntensity;
-      program.uniforms.uScan.value      = scanlineIntensity;
-      program.uniforms.uScanFreq.value  = scanlineFrequency;
-      program.uniforms.uWarp.value      = warpAmount;
+      program.uniforms.uTime.value = ((performance.now() - start) / 1000) * speed;
+      program.uniforms.uHueShift.value = hueShift;
+      program.uniforms.uNoise.value = noiseIntensity;
+      program.uniforms.uScan.value = scanlineIntensity;
+      program.uniforms.uScanFreq.value = scanlineFrequency;
+      program.uniforms.uWarp.value = warpAmount;
       renderer.render({ scene: mesh });
-      raf = requestAnimationFrame(loop);
+      frame = requestAnimationFrame(loop);
     };
+
     loop();
 
     return () => {
-      cancelAnimationFrame(raf);
+      cancelAnimationFrame(frame);
       window.removeEventListener('resize', resize);
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  return (
-    <canvas
-      ref={canvasRef}
-      style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', display: 'block' }}
-    />
-  );
+  }, [hueShift, noiseIntensity, scanlineIntensity, speed, scanlineFrequency, warpAmount, resolutionScale]);
+  return <canvas ref={ref} className="w-full h-full block" />;
 }

@@ -22,7 +22,7 @@ export default function HeroSection() {
 
       {/* DarkVeil background */}
       <div style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, zIndex: 0 }}>
-        <DarkVeil hueShift={220} noiseIntensity={0.01} speed={0.16} warpAmount={0.05} resolutionScale={0.55} />
+        <DarkVeil hueShift={0} noiseIntensity={0} scanlineIntensity={0} speed={0.8} scanlineFrequency={0} warpAmount={0} />
       </div>
 
       {/* Minimal vignette */}

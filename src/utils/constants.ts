@@ -1,18 +1,18 @@
 // ─── Portfolio Data ─────────────────────────────────────────────────────────
 
 export const PORTFOLIO_OWNER = {
-  name: 'Alex Renard',
+  name: 'Evan Troget',
   title: 'Développeur Web Fullstack',
   stack: 'React · TypeScript · Node.js',
   subtitle: 'Développeur React / TypeScript fraîchement diplômé, je cherche un CDI ou CDD pour apporter ma curiosité, mon soin du détail et ma motivation à une équipe qui construit des choses qui comptent.',
   avatar: 'https://i.pravatar.cc/200?img=12',
   location: 'Nantes · La Rochelle · Vendée',
-  email: 'alex.renard@dev.io',
-  github: 'https://github.com/alex-renard',
-  linkedin: 'https://linkedin.com/in/alex-renard',
+  email: 'contact.evantroget@gmail.com',
+  github: 'https://github.com/Tr-Evan',
+  linkedin: 'https://www.linkedin.com/in/troget-evan/',
   twitter: 'https://twitter.com/alex_renard',
   availableFrom: 'Octobre 2026',
-  bio: `Master 2 Informatique (EPITA, 2026). Deux stages en startup, un mémoire sur la génération de contenu IA, et plusieurs side-projects open-source. Ce qui me motive : le soin du détail, la DX, et les interfaces qui semblent vivantes.`,
+  bio: `Master 2 Informatique (Sup de Vinci, 2026). Deux alternance en startup et ESN, un mémoire sur l'agentic IA, et plusieurs side-projects open-source. Ce qui me motive : le soin du détail, l'UX UI, et les interfaces qui semblent vivantes.`,
 };
 
 export const PROJECTS = [
@@ -196,7 +196,7 @@ export const TIMELINE = [
     color: '#60a5fa',
   },
   {
-    year: '2024',
+    year: '2026',
     title: 'Stage Développeur Web (3 mois)',
     company: 'Agence Numérique',
     description: 'Intégration maquettes Figma, développement React/Node.js. Premier contact professionnel sérieux.',
