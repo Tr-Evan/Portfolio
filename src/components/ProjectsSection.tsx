@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, memo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FiGithub, FiExternalLink } from 'react-icons/fi';
 import { useScrollAnimation } from '../hooks/useScrollAnimation';
@@ -52,6 +52,8 @@ function ProjectCard({ project, index }: { project: typeof PROJECTS[0]; index: n
           <div style={{ position: 'relative', height: 172, overflow: 'hidden', borderRadius: '14px 14px 0 0' }}>
             <motion.img
               src={project.image} alt={project.name}
+              loading="lazy"
+              decoding="async"
               animate={{ scale: hovered ? 1.05 : 1 }}
               transition={{ duration: 0.5 }}
               style={{ width: '100%', height: '100%', objectFit: 'cover' }}
@@ -107,7 +109,7 @@ function ProjectCard({ project, index }: { project: typeof PROJECTS[0]; index: n
   );
 }
 
-export default function ProjectsSection() {
+function ProjectsSection() {
   const [active, setActive] = useState('all');
   const [ref, visible] = useScrollAnimation<HTMLDivElement>();
   const filtered = active === 'all' ? PROJECTS : PROJECTS.filter((p) => p.category === active);
@@ -151,3 +153,5 @@ export default function ProjectsSection() {
     </section>
   );
 }
+
+export default memo(ProjectsSection);

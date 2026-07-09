@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import { motion } from 'framer-motion';
 import { FiDownload, FiMapPin, FiMail, FiAward } from 'react-icons/fi';
 import { useScrollAnimation } from '../hooks/useScrollAnimation';
@@ -48,6 +49,8 @@ function ProfileBioCard() {
             <img
               src={PORTFOLIO_OWNER.avatar}
               alt={PORTFOLIO_OWNER.name}
+              loading="lazy"
+              decoding="async"
               style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'top center' }}
             />
             {/* Gradient to card bg */}
@@ -105,7 +108,7 @@ function ValuePropCard({ icon, title, desc }: { icon: string; title: string; des
   );
 }
 
-export default function AboutSection() {
+function AboutSection() {
   const [ref, visible] = useScrollAnimation<HTMLDivElement>();
   return (
     <section id="about" style={{ background: 'var(--surface)', paddingTop: 120, paddingBottom: 120 }}>
@@ -151,3 +154,5 @@ export default function AboutSection() {
     </section>
   );
 }
+
+export default memo(AboutSection);

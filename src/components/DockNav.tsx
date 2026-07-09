@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, memo } from 'react';
 import { motion } from 'framer-motion';
 import { FiHome, FiUser, FiCode, FiZap, FiHeart, FiMail, FiGithub, FiCommand } from 'react-icons/fi';
 import Dock from './react-bits/Dock';
@@ -7,7 +7,7 @@ interface DockNavProps {
   onOpenCmd?: () => void;
 }
 
-export default function DockNav({ onOpenCmd }: DockNavProps) {
+function DockNav({ onOpenCmd }: DockNavProps) {
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
@@ -69,3 +69,5 @@ export default function DockNav({ onOpenCmd }: DockNavProps) {
     </div>
   );
 }
+
+export default memo(DockNav);

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, memo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useScrollAnimation } from '../hooks/useScrollAnimation';
 import { PASSIONS } from '../utils/constants';
@@ -139,7 +139,7 @@ function PassionCard({ passion, index }: { passion: Passion; index: number }) {
 }
 
 // ─── Section ─────────────────────────────────────────────────────────────────
-export default function PassionsSection() {
+function PassionsSection() {
   const [ref, visible] = useScrollAnimation<HTMLDivElement>();
 
   return (
@@ -174,3 +174,5 @@ export default function PassionsSection() {
     </section>
   );
 }
+
+export default memo(PassionsSection);

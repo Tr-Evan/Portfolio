@@ -10,4 +10,14 @@ export default defineConfig({
     react(),
     tailwindcss(),
   ],
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          'framer-motion': ['framer-motion'],
+          'ogl': ['ogl'],
+        },
+      },
+    },
+  },
 })

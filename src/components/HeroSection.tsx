@@ -1,4 +1,5 @@
-import { motion } from 'framer-motion';
+import { memo, useRef } from 'react';
+import { motion, useInView } from 'framer-motion';
 import { FiGithub, FiLinkedin, FiDownload, FiMail, FiMapPin } from 'react-icons/fi';
 import DarkVeil from './react-bits/DarkVeil';
 import { PORTFOLIO_OWNER } from '../utils/constants';
@@ -9,7 +10,10 @@ const FADE = (delay = 0) => ({
   transition: { duration: 0.55, delay, ease: [0.4, 0, 0.2, 1] as [number, number, number, number] },
 });
 
-export default function HeroSection() {
+export default memo(function HeroSection() {
+  const sectionRef = useRef<HTMLElement>(null);
+  const inView = useInView(sectionRef, { amount: 0.1 });
+
   const stats = [
     { v: 'Mastère Dev',        l: 'Sup de Vinci 2026' },
     { v: '3 ans alt.',         l: '1 an + 2 ans'       },
@@ -18,7 +22,7 @@ export default function HeroSection() {
   ];
 
   return (
-    <section id="hero" style={{ position: 'relative', minHeight: '100svh', display: 'flex', alignItems: 'center', overflow: 'hidden' }}>
+    <section ref={sectionRef} id="hero" style={{ position: 'relative', minHeight: '100svh', display: 'flex', alignItems: 'center', overflow: 'hidden' }}>
 
       {/* DarkVeil background */}
       <div style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, zIndex: 0 }}>
@@ -41,7 +45,9 @@ export default function HeroSection() {
             padding: '5px 14px', borderRadius: 8,
             background: 'rgba(74,222,128,0.07)', border: '1px solid rgba(74,222,128,0.18)', color: '#4ade80',
           }}>
-            <motion.span animate={{ opacity: [1, 0.3, 1] }} transition={{ duration: 1.8, repeat: Infinity }}
+            <motion.span
+              animate={inView ? { opacity: [1, 0.3, 1] } : { opacity: 1 }}
+              transition={inView ? { duration: 1.8, repeat: Infinity } : { duration: 0.3 }}
               style={{ width: 6, height: 6, borderRadius: '50%', background: '#4ade80', display: 'inline-block' }} />
             Disponible oct. 2026
           </span>
@@ -160,4 +166,4 @@ export default function HeroSection() {
       </div>
     </section>
   );
-}
+})

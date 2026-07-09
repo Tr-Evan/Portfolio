@@ -1,11 +1,11 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, memo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 interface PageLoaderProps {
   onDone: () => void;
 }
 
-export default function PageLoader({ onDone }: PageLoaderProps) {
+function PageLoader({ onDone }: PageLoaderProps) {
   const [progress, setProgress] = useState(0);
   const [phase, setPhase] = useState<'filling' | 'leaving'>('filling');
 
@@ -129,3 +129,5 @@ export default function PageLoader({ onDone }: PageLoaderProps) {
     </AnimatePresence>
   );
 }
+
+export default memo(PageLoader);

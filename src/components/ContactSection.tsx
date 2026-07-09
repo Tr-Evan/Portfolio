@@ -1,5 +1,5 @@
-import { useState, useRef, useCallback } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { useState, useRef, useCallback, memo } from 'react';
+import { motion, AnimatePresence, useInView } from 'framer-motion';
 import { FiSend, FiCheck, FiMail, FiMapPin, FiGithub, FiLinkedin, FiDownload, FiCalendar, FiPaperclip, FiX, FiFileText } from 'react-icons/fi';
 import { useScrollAnimation } from '../hooks/useScrollAnimation';
 import { PORTFOLIO_OWNER } from '../utils/constants';
@@ -133,7 +133,9 @@ function FileDropZone({ files, setFiles }: { files: File[]; setFiles: (f: File[]
 interface F { name: string; company: string; email: string; message: string; }
 interface E { name?: string; email?: string; message?: string; }
 
-export default function ContactSection() {
+function ContactSection() {
+  const sectionRef = useRef<HTMLElement>(null);
+  const inView = useInView(sectionRef, { amount: 0.1 });
   const [form,    setForm]    = useState<F>({ name: '', company: '', email: '', message: '' });
   const [errors,  setErrors]  = useState<E>({});
   const [files,   setFiles]   = useState<File[]>([]);
@@ -167,7 +169,7 @@ export default function ContactSection() {
   ];
 
   return (
-    <section id="contact" style={{ background: 'var(--surface)', paddingTop: 120, paddingBottom: 140 }}>
+    <section ref={sectionRef} id="contact" style={{ background: 'var(--surface)', paddingTop: 120, paddingBottom: 140 }}>
       <div className="container">
 
         {/* Header */}
@@ -218,7 +220,9 @@ export default function ContactSection() {
             ))}
 
             <div className="card" style={{ padding: '13px 16px', display: 'flex', alignItems: 'center', gap: 10, borderColor: 'rgba(74,222,128,0.18)' }}>
-              <motion.span animate={{ opacity: [1, 0.3, 1] }} transition={{ duration: 1.8, repeat: Infinity }}
+              <motion.span
+                animate={inView ? { opacity: [1, 0.3, 1] } : { opacity: 1 }}
+                transition={inView ? { duration: 1.8, repeat: Infinity } : { duration: 0.3 }}
                 style={{ width: 6, height: 6, borderRadius: '50%', background: '#4ade80', flexShrink: 0 }} />
               <p style={{ fontSize: 13, color: 'var(--fg-2)' }}>Répond sous <strong style={{ color: 'var(--fg)' }}>24h</strong></p>
             </div>
@@ -245,8 +249,8 @@ export default function ContactSection() {
             <div style={{ position: 'relative' }}>
               {/* Ambient glow */}
               <motion.div
-                animate={{ opacity: [0.35, 0.6, 0.35], scale: [1, 1.015, 1] }}
-                transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
+                animate={inView ? { opacity: [0.35, 0.6, 0.35], scale: [1, 1.015, 1] } : { opacity: 0.35, scale: 1 }}
+                transition={inView ? { duration: 4, repeat: Infinity, ease: 'easeInOut' } : {}}
                 style={{
                   position: 'absolute', inset: -3, borderRadius: 20, zIndex: 0,
                   background: 'linear-gradient(135deg, rgba(129,140,248,0.22), rgba(167,139,250,0.12), rgba(96,165,250,0.18))',
@@ -317,3 +321,5 @@ export default function ContactSection() {
     </section>
   );
 }
+
+export default memo(ContactSection);

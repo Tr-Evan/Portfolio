@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, useCallback } from 'react';
+import { useState, useEffect, useRef, useCallback, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FiSearch, FiArrowRight, FiX } from 'react-icons/fi';
 import { CMD_ACTIONS } from '../utils/constants';
@@ -16,8 +16,9 @@ export default function CommandBar({ open, onClose }: CommandBarProps) {
   const [copied,   setCopied]   = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
 
-  const filtered = CMD_ACTIONS.filter((a) =>
-    a.label.toLowerCase().includes(query.toLowerCase())
+  const filtered = useMemo(
+    () => CMD_ACTIONS.filter((a) => a.label.toLowerCase().includes(query.toLowerCase())),
+    [query]
   );
 
   // Focus input on open

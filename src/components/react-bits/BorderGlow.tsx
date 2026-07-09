@@ -82,7 +82,9 @@ const BorderGlow: React.FC<BorderGlowProps> = ({
   colors = ['#818cf8', '#a78bfa', '#60a5fa'],
   fillOpacity = 0.5,
 }) => {
-  const cardRef = useRef<HTMLDivElement>(null);
+  const cardRef       = useRef<HTMLDivElement>(null);
+  const pendingRef    = useRef(false);
+  const rawMouseRef   = useRef({ clientX: 0, clientY: 0 });
   const [isHovered,     setIsHovered]     = useState(false);
   const [cursorAngle,   setCursorAngle]   = useState(45);
   const [edgeProximity, setEdgeProximity] = useState(0);
@@ -112,12 +114,19 @@ const BorderGlow: React.FC<BorderGlowProps> = ({
   }, [getCenter]);
 
   const handlePointerMove = useCallback((e: React.PointerEvent<HTMLDivElement>) => {
-    const card = cardRef.current;
-    if (!card) return;
-    const rect = card.getBoundingClientRect();
-    const x = e.clientX - rect.left, y = e.clientY - rect.top;
-    setEdgeProximity(getEdgeProximity(card, x, y));
-    setCursorAngle(getCursorAngle(card, x, y));
+    rawMouseRef.current = { clientX: e.clientX, clientY: e.clientY };
+    if (pendingRef.current) return;
+    pendingRef.current = true;
+    requestAnimationFrame(() => {
+      pendingRef.current = false;
+      const card = cardRef.current;
+      if (!card) return;
+      const rect = card.getBoundingClientRect();
+      const x = rawMouseRef.current.clientX - rect.left;
+      const y = rawMouseRef.current.clientY - rect.top;
+      setEdgeProximity(getEdgeProximity(card, x, y));
+      setCursorAngle(getCursorAngle(card, x, y));
+    });
   }, [getEdgeProximity, getCursorAngle]);
 
   useEffect(() => {
@@ -204,4 +213,4 @@ const BorderGlow: React.FC<BorderGlowProps> = ({
   );
 };
 
-export default BorderGlow;
+export default React.memo(BorderGlow);

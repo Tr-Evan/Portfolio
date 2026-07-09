@@ -1,4 +1,4 @@
-import { useEffect, useState, useCallback } from 'react';
+import { useEffect, useState, useCallback, lazy, Suspense } from 'react';
 import { motion } from 'framer-motion';
 import PageLoader from './components/PageLoader';
 import DockNav from './components/DockNav';
@@ -9,10 +9,11 @@ import SkillsSection from './components/SkillsSection';
 import PassionsSection from './components/PassionsSection';
 import ContactSection from './components/ContactSection';
 import Footer from './components/Footer';
-import CommandBar from './components/CommandBar';
 import GradualBlur from './components/react-bits/GradualBlur';
 import { useLenis } from './hooks/useLenis';
 import { useCustomCursor } from './hooks/useCustomCursor';
+
+const CommandBar = lazy(() => import('./components/CommandBar'));
 
 export default function App() {
   useLenis();
@@ -58,7 +59,9 @@ export default function App() {
         className="relative"
       >
         <DockNav onOpenCmd={openCmd} />
-        <CommandBar open={cmdOpen} onClose={closeCmd} />
+        <Suspense fallback={null}>
+          <CommandBar open={cmdOpen} onClose={closeCmd} />
+        </Suspense>
 
         <main>
           <HeroSection />

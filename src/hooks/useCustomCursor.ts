@@ -34,10 +34,13 @@ export function useCustomCursor() {
     };
     raf.current = requestAnimationFrame(animate);
 
+    let controller = new AbortController();
     const addListeners = () => {
+      controller.abort();
+      controller = new AbortController();
       document.querySelectorAll('a, button, [data-cursor="pointer"]').forEach((el) => {
-        el.addEventListener('mouseenter', onIn);
-        el.addEventListener('mouseleave', onOut);
+        el.addEventListener('mouseenter', onIn,  { signal: controller.signal });
+        el.addEventListener('mouseleave', onOut, { signal: controller.signal });
       });
     };
     addListeners();
@@ -48,6 +51,7 @@ export function useCustomCursor() {
     observer.observe(document.body, { childList: true, subtree: true });
 
     return () => {
+      controller.abort();
       cancelAnimationFrame(raf.current);
       window.removeEventListener('mousemove', onMove);
       observer.disconnect();

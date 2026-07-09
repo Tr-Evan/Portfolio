@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, memo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useScrollAnimation } from '../hooks/useScrollAnimation';
 import { SKILLS, SKILL_CATEGORIES } from '../utils/constants';
@@ -47,7 +47,7 @@ function SkillRow({ skill, visible, index }: { skill: typeof SKILLS[0]; visible:
   );
 }
 
-export default function SkillsSection() {
+function SkillsSection() {
   const [activeCategory, setActiveCategory] = useState('frontend');
   const [ref, visible] = useScrollAnimation<HTMLDivElement>({ threshold: 0.1 });
   const [headerRef, headerVisible] = useScrollAnimation<HTMLDivElement>();
@@ -187,3 +187,5 @@ export default function SkillsSection() {
     </section>
   );
 }
+
+export default memo(SkillsSection);

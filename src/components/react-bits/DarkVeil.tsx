@@ -122,33 +122,54 @@ export default function DarkVeil({
     const mesh = new Mesh(gl, { geometry, program });
 
     const resize = () => {
-      const w = parent.clientWidth,
-        h = parent.clientHeight;
-      renderer.setSize(w * resolutionScale, h * resolutionScale);
-      program.uniforms.uResolution.value.set(w, h);
+      const w = parent.clientWidth, h = parent.clientHeight;
+      renderer.setSize(Math.round(w * resolutionScale), Math.round(h * resolutionScale));
+      program.uniforms.uResolution.value.set(gl.canvas.width, gl.canvas.height);
+      canvas.style.width  = '100%';
+      canvas.style.height = '100%';
     };
 
     window.addEventListener('resize', resize);
     resize();
 
-    const start = performance.now();
-    let frame = 0;
+    let elapsed = 0;
+    let lastTs  = 0;
+    let rafId   = 0;
 
-    const loop = () => {
-      program.uniforms.uTime.value = ((performance.now() - start) / 1000) * speed;
-      program.uniforms.uHueShift.value = hueShift;
-      program.uniforms.uNoise.value = noiseIntensity;
-      program.uniforms.uScan.value = scanlineIntensity;
-      program.uniforms.uScanFreq.value = scanlineFrequency;
-      program.uniforms.uWarp.value = warpAmount;
+    const tick = (ts: number) => {
+      if (lastTs > 0) elapsed += (ts - lastTs) / 1000 * speed;
+      lastTs = ts;
+      program.uniforms.uTime.value      = elapsed;
+      program.uniforms.uHueShift.value  = hueShift;
+      program.uniforms.uNoise.value     = noiseIntensity;
+      program.uniforms.uScan.value      = scanlineIntensity;
+      program.uniforms.uScanFreq.value  = scanlineFrequency;
+      program.uniforms.uWarp.value      = warpAmount;
       renderer.render({ scene: mesh });
-      frame = requestAnimationFrame(loop);
+      rafId = requestAnimationFrame(tick);
     };
 
-    loop();
+    rafId = requestAnimationFrame(tick);
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          if (!rafId) {
+            lastTs = 0;
+            rafId  = requestAnimationFrame(tick);
+          }
+        } else {
+          cancelAnimationFrame(rafId);
+          rafId = 0;
+        }
+      },
+      { threshold: 0 }
+    );
+    observer.observe(canvas);
 
     return () => {
-      cancelAnimationFrame(frame);
+      cancelAnimationFrame(rafId);
+      observer.disconnect();
       window.removeEventListener('resize', resize);
     };
   }, [hueShift, noiseIntensity, scanlineIntensity, speed, scanlineFrequency, warpAmount, resolutionScale]);

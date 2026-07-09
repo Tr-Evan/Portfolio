@@ -1,9 +1,10 @@
+import { memo } from 'react';
 import { motion } from 'framer-motion';
 import { FiGithub, FiLinkedin, FiTwitter, FiArrowUp } from 'react-icons/fi';
 import { NAV_LINKS, PORTFOLIO_OWNER } from '../utils/constants';
 import GradualBlur from './react-bits/GradualBlur';
 
-export default function Footer() {
+function Footer() {
   return (
     <footer style={{ background: 'var(--bg)', borderTop: '1px solid var(--border)', position: 'relative', overflow: 'hidden' }}>
       {/* GradualBlur at the very bottom — blurs content upward, giving a fade-to-black feel */}
@@ -101,3 +102,5 @@ export default function Footer() {
     </footer>
   );
 }
+
+export default memo(Footer);
