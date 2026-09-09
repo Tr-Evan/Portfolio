@@ -1,6 +1,6 @@
 import { useEffect, useState, memo } from 'react';
 import { motion } from 'framer-motion';
-import { FiHome, FiUser, FiCode, FiZap, FiHeart, FiMail, FiGithub, FiCommand } from 'react-icons/fi';
+import { FiUser, FiCode, FiZap, FiHeart, FiMail, FiGithub, FiCommand } from 'react-icons/fi';
 import Dock from './react-bits/Dock';
 
 interface DockNavProps {
