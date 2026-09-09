@@ -16,7 +16,7 @@ export default defineConfig({
         manualChunks: {
           'framer-motion': ['framer-motion'],
           'ogl': ['ogl'],
-        },
+        } as Record<string, string[]>,
       },
     },
   },
