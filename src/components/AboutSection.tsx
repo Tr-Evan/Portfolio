@@ -116,7 +116,7 @@ function AboutSection() {
         <motion.div ref={ref} initial="hidden" animate={visible ? 'show' : 'hidden'} variants={fadeUp} style={{ marginBottom: 64 }}>
           <p className="label" style={{ marginBottom: 14 }}>À propos</p>
           <h2 style={{ fontFamily: 'var(--font-head)', fontWeight: 800, fontSize: 'clamp(1.9rem, 4vw, 3rem)', letterSpacing: '-0.03em', color: 'var(--fg)' }}>
-            Frais diplômé.<br /><span className="grad">Pas forcément débutant.</span>
+            Fraichement diplômé.<br /><span className="grad">Pas forcément débutant.</span>
           </h2>
         </motion.div>
 

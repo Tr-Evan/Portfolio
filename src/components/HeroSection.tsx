@@ -18,7 +18,6 @@ export default memo(function HeroSection() {
     { v: 'Mastère Dev',        l: 'Sup de Vinci 2026' },
     { v: '3 ans alt.',         l: '1 an + 2 ans'       },
     { v: '3ème place',         l: 'Hackathon 2026'     },
-    { v: '120 ★',              l: 'open-source'        },
   ];
 
   return (

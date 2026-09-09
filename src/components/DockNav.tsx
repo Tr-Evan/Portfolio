@@ -19,7 +19,6 @@ function DockNav({ onOpenCmd }: DockNavProps) {
     document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
 
   const navItems = [
-    { icon: <FiHome size={16} style={{ color: 'rgba(255,255,255,0.7)' }} />,   label: 'Accueil',  onClick: () => go('hero') },
     { icon: <FiUser size={16} style={{ color: 'rgba(255,255,255,0.7)' }} />,   label: 'À propos', onClick: () => go('about') },
     { icon: <FiCode size={16} style={{ color: 'rgba(255,255,255,0.7)' }} />,   label: 'Projets',  onClick: () => go('projects') },
     { icon: <FiZap  size={16} style={{ color: 'rgba(255,255,255,0.7)' }} />,   label: 'Stack',    onClick: () => go('skills') },
@@ -31,7 +30,7 @@ function DockNav({ onOpenCmd }: DockNavProps) {
       onClick: () => go('contact'),
       className: 'ring-1 ring-[#818cf8]/25 bg-[#818cf8]/[0.08]',
     },
-    { icon: <FiGithub size={15} style={{ color: 'rgba(255,255,255,0.5)' }} />, label: 'GitHub', onClick: () => window.open('https://github.com/alex-renard', '_blank', 'noopener') },
+    { icon: <FiGithub size={15} style={{ color: 'rgba(255,255,255,0.5)' }} />, label: 'GitHub', onClick: () => window.open('https://github.com/Tr-Evan', '_blank', 'noopener') },
     ...(onOpenCmd
       ? [{ icon: <FiCommand size={13} style={{ color: 'rgba(255,255,255,0.4)' }} />, label: '⌘K', onClick: onOpenCmd }]
       : []),

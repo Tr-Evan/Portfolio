@@ -180,8 +180,8 @@ function ContactSection() {
             <span className="grad">qui s'implique vraiment ?</span>
           </h2>
           <p style={{ fontSize: 15, color: 'var(--fg-2)', lineHeight: 1.75, maxWidth: 520 }}>
-            Je cherche un CDI ou CDD pour continuer à apprendre dans un contexte exigeant.
-            Si vous construisez quelque chose d'intéressant, parlons-en.
+            Je cherche un CDI ou CDD pour continuer à apprendre dans un contexte stimulant.
+            Si vous construisez quelque chose d'intéressant, parlons-en !
           </p>
         </motion.div>
 
