@@ -13,10 +13,15 @@ export default defineConfig({
   build: {
     rollupOptions: {
       output: {
-        manualChunks: {
-          'framer-motion': ['framer-motion'],
-          'ogl': ['ogl'],
-        } as Record<string, string[]>,
+        manualChunks: (moduleId) => {
+          if (moduleId.includes('/framer-motion/') || moduleId.includes('\\framer-motion\\')) {
+            return 'framer-motion'
+          }
+
+          if (moduleId.includes('/ogl/') || moduleId.includes('\\ogl\\')) {
+            return 'ogl'
+          }
+        },
       },
     },
   },
