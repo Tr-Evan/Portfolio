@@ -41,13 +41,13 @@ function ProfileBioCard() {
   return (
     <motion.div initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.3 }} variants={fadeUp}>
       <BorderGlow backgroundColor="var(--card)" borderRadius={16} glowRadius={50} glowIntensity={0.75}
-        colors={['#818cf8', '#a78bfa', '#60a5fa']} edgeSensitivity={18} coneSpread={30} fillOpacity={0.28}>
+        colors={['#60a5fa', '#f472b6', '#facc15']} edgeSensitivity={18} coneSpread={30} fillOpacity={0.28}>
         <div style={{ overflow: 'hidden', borderRadius: 16 }}>
 
           {/* Photo — large, full width */}
           <div style={{ position: 'relative', height: 220, overflow: 'hidden' }}>
             <img
-              src={PORTFOLIO_OWNER.avatar}
+              src={PORTFOLIO_OWNER.avatar}  
               alt={PORTFOLIO_OWNER.name}
               loading="lazy"
               decoding="async"
@@ -98,7 +98,7 @@ function ProfileBioCard() {
 function ValuePropCard({ icon, title, desc }: { icon: string; title: string; desc: string }) {
   return (
     <BorderGlow backgroundColor="var(--card)" borderRadius={12} glowRadius={36} glowIntensity={0.7}
-      colors={['#818cf8', '#a78bfa', '#60a5fa']} edgeSensitivity={25} coneSpread={30} fillOpacity={0.3}>
+      colors={['#60a5fa', '#f472b6', '#facc15']} edgeSensitivity={25} coneSpread={30} fillOpacity={0.3}>
       <div style={{ padding: '18px 18px' }}>
         <span style={{ fontSize: 18, display: 'block', marginBottom: 10 }}>{icon}</span>
         <p style={{ fontFamily: 'var(--font-head)', fontWeight: 600, fontSize: 13, color: 'var(--fg)', marginBottom: 5 }}>{title}</p>

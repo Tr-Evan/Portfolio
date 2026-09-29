@@ -79,7 +79,7 @@ const BorderGlow: React.FC<BorderGlowProps> = ({
   glowIntensity = 1.0,
   coneSpread = 25,
   animated = false,
-  colors = ['#818cf8', '#a78bfa', '#60a5fa'],
+  colors = ['#60a5fa', '#f472b6', '#facc15'],
   fillOpacity = 0.5,
 }) => {
   const cardRef       = useRef<HTMLDivElement>(null);
@@ -195,7 +195,7 @@ const BorderGlow: React.FC<BorderGlowProps> = ({
       } as React.CSSProperties} />
 
       {/* outer glow */}
-      <span className="absolute pointer-events-none z-[1] rounded-[inherit]" style={{
+      <span className="absolute pointer-events-none z-[2] rounded-[inherit]" style={{
         inset: `${-glowRadius}px`,
         maskImage: maskGlow, WebkitMaskImage: maskGlow,
         opacity: glowOp, mixBlendMode: 'plus-lighter', transition: trans,

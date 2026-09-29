@@ -20,11 +20,11 @@ function Field({ label, name, value, onChange, error, multiline, type = 'text' }
   const [focused, setFocused] = useState(false);
   const s = {
     width: '100%', background: 'transparent',
-    border: `1px solid ${error ? 'rgba(248,113,113,0.45)' : focused ? 'var(--accent-border)' : 'var(--border)'}`,
+    border: `1px solid ${error ? 'rgba(248,113,113,0.45)' : focused ? 'var(--ring)' : 'var(--border)'}`,
     borderRadius: 10, color: 'var(--fg)', padding: '13px 15px',
     fontFamily: 'var(--font-body)', fontSize: 14, outline: 'none', resize: 'none' as const,
     transition: 'border-color .2s, box-shadow .2s',
-    boxShadow: focused ? '0 0 0 3px var(--accent-dim)' : 'none',
+    boxShadow: focused ? '0 0 0 3px var(--ring-dim)' : 'none',
   };
   return (
     <div>
@@ -110,7 +110,7 @@ function FileDropZone({ files, setFiles }: { files: File[]; setFiles: (f: File[]
                 style={{
                   display: 'flex', alignItems: 'center', gap: 6,
                   padding: '4px 10px', borderRadius: 6,
-                  background: 'rgba(129,140,248,0.07)', border: '1px solid rgba(129,140,248,0.2)',
+                  background: 'var(--accent-dim)', border: '1px solid var(--accent-border)',
                   fontSize: 12, color: 'var(--accent)',
                 }}
               >
@@ -259,7 +259,7 @@ function ContactSection() {
               />
 
               <BorderGlow backgroundColor="var(--card)" borderRadius={16} glowRadius={72} glowIntensity={1.2}
-                colors={['#818cf8', '#a78bfa', '#60a5fa']} edgeSensitivity={8} coneSpread={35} fillOpacity={0.22}>
+                colors={['#60a5fa', '#f472b6', '#facc15']} edgeSensitivity={8} coneSpread={35} fillOpacity={0.22}>
                 <div style={{ padding: '28px 28px', position: 'relative', zIndex: 1 }}>
 
                   <AnimatePresence mode="wait">

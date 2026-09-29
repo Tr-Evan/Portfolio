@@ -1,7 +1,7 @@
 import { memo, useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
 import { FiGithub, FiLinkedin, FiDownload, FiMail, FiMapPin } from 'react-icons/fi';
-import DarkVeil from './react-bits/DarkVeil';
+import Aurora from './react-bits/Aurora';
 import { PORTFOLIO_OWNER } from '../utils/constants';
 
 const FADE = (delay = 0) => ({
@@ -23,9 +23,9 @@ export default memo(function HeroSection() {
   return (
     <section ref={sectionRef} id="hero" style={{ position: 'relative', minHeight: '100svh', display: 'flex', alignItems: 'center', overflow: 'hidden' }}>
 
-      {/* DarkVeil background */}
+      {/* Aurora background */}
       <div style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, zIndex: 0 }}>
-        <DarkVeil hueShift={0} noiseIntensity={0} scanlineIntensity={0} speed={0.8} scanlineFrequency={0} warpAmount={0} />
+        <Aurora colorStops={['#3B82F6', '#EC4899', '#EAB308']} blend={1} amplitude={1} speed={0.5} />
       </div>
 
       {/* Minimal vignette */}
@@ -53,7 +53,7 @@ export default memo(function HeroSection() {
           <span style={{
             display: 'inline-flex', alignItems: 'center', gap: 6, fontSize: 11, fontFamily: 'var(--font-mono)',
             padding: '5px 12px', borderRadius: 8,
-            background: 'rgba(129,140,248,0.07)', border: '1px solid rgba(129,140,248,0.18)', color: 'var(--accent)',
+            background: 'var(--primary-dim)', border: '1px solid var(--primary-border)', color: 'var(--primary)',
           }}>
             🎯 CDI · CDD
           </span>
@@ -141,7 +141,7 @@ export default memo(function HeroSection() {
           </motion.div>
         </div>
 
-        {/* Socials + hint */}
+        {/* Socials */}
         <motion.div {...FADE(0.45)} style={{
           display: 'flex', gap: 12, marginTop: 48, paddingTop: 28,
           borderTop: '1px solid rgba(255,255,255,0.07)', alignItems: 'center', flexWrap: 'wrap',
@@ -156,11 +156,6 @@ export default memo(function HeroSection() {
               {icon} {label}
             </motion.a>
           ))}
-          <span style={{ fontSize: 12, color: 'var(--fg-3)', marginLeft: 4, fontFamily: 'var(--font-mono)' }}>
-            Appuyez{' '}
-            <kbd style={{ padding: '1px 5px', borderRadius: 4, background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.1)', fontSize: 11 }}>⌘K</kbd>
-            {' '}pour naviguer rapidement
-          </span>
         </motion.div>
       </div>
     </section>

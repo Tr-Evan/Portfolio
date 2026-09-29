@@ -18,10 +18,20 @@
   --fg-2:    #8888a8;
   --fg-3:    #55556a;
 
-  /* Accent — soft violet */
-  --accent:       #8b7cf8;
-  --accent-dim:   rgba(139, 124, 248, 0.12);
-  --accent-border:rgba(139, 124, 248, 0.25);
+  /* Aurora accents: blue, rose, and gold */
+  --primary:            #60a5fa;
+  --primary-foreground: #09090e;
+  --primary-dim:        rgba(96, 165, 250, 0.12);
+  --primary-border:     rgba(96, 165, 250, 0.35);
+  --secondary:          #f472b6;
+  --secondary-foreground: #09090e;
+  --secondary-dim:      rgba(244, 114, 182, 0.12);
+  --accent:             #facc15;
+  --accent-foreground:  #09090e;
+  --accent-dim:         rgba(250, 204, 21, 0.12);
+  --accent-border:      rgba(250, 204, 21, 0.35);
+  --ring:               #60a5fa;
+  --ring-dim:           rgba(96, 165, 250, 0.28);
 
   /* Ease */
   --ease: cubic-bezier(0.4, 0, 0.2, 1);
@@ -84,7 +94,8 @@ h1, h2, h3 { font-family: var(--font-head); color: var(--fg); }
 
 .card:hover {
   background: var(--card-hover);
-  border-color: var(--border-strong);
+  border-color: var(--primary-border);
+  box-shadow: 0 0 22px var(--primary-dim);
 }
 
 /* ─── Subtle divider ─────────────────────────────────────────── */
@@ -137,14 +148,15 @@ h1, h2, h3 { font-family: var(--font-head); color: var(--fg); }
   font-family: var(--font-body);
   font-size: 13px;
   font-weight: 500;
-  color: var(--bg);
-  background: var(--fg);
+  color: var(--primary-foreground);
+  background: var(--primary);
   border: none;
   cursor: pointer;
-  transition: opacity .2s, transform .15s;
+  box-shadow: 0 0 20px var(--primary-dim);
+  transition: opacity .2s, transform .15s, box-shadow .2s;
 }
 
-.btn-primary:hover  { opacity: 0.88; transform: translateY(-1px); }
+.btn-primary:hover  { opacity: 0.95; transform: translateY(-1px); box-shadow: 0 0 28px var(--primary-dim); }
 .btn-primary:active { transform: translateY(0); opacity: 0.75; }
 
 .btn-ghost {
@@ -164,9 +176,14 @@ h1, h2, h3 { font-family: var(--font-head); color: var(--fg); }
 }
 
 .btn-ghost:hover {
-  color: var(--fg);
-  border-color: var(--border-strong);
-  background: rgba(255,255,255,0.03);
+  color: var(--secondary);
+  border-color: var(--secondary);
+  background: var(--secondary-dim);
+}
+
+:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 3px;
 }
 
 /* ─── Skill bar ──────────────────────────────────────────────── */
@@ -201,8 +218,8 @@ h1, h2, h3 { font-family: var(--font-head); color: var(--fg); }
 .input::placeholder { color: var(--fg-3); }
 
 .input:focus {
-  border-color: var(--accent-border);
-  box-shadow: 0 0 0 3px var(--accent-dim);
+  border-color: var(--ring);
+  box-shadow: 0 0 0 3px var(--ring-dim);
 }
 
 /* ─── Animations ─────────────────────────────────────────────── */
@@ -222,7 +239,7 @@ h1, h2, h3 { font-family: var(--font-head); color: var(--fg); }
 
 /* ─── Gradient text ──────────────────────────────────────────── */
 .grad {
-  background: linear-gradient(135deg, var(--fg) 30%, var(--accent));
+  background: linear-gradient(110deg, var(--primary) 15%, var(--secondary) 58%, var(--accent) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;

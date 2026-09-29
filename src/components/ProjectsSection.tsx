@@ -12,16 +12,16 @@ const fadeUp = {
 };
 
 const CARD_COLORS: Record<string, string[]> = {
-  '#818cf8': ['#818cf8', '#a78bfa', '#60a5fa'],
-  '#34d399': ['#34d399', '#6ee7b7', '#a7f3d0'],
-  '#60a5fa': ['#60a5fa', '#93c5fd', '#818cf8'],
-  '#f59e0b': ['#f59e0b', '#fbbf24', '#fb923c'],
-  '#a78bfa': ['#a78bfa', '#c4b5fd', '#818cf8'],
+  '#818cf8': ['#60a5fa', '#f472b6', '#facc15'],
+  '#34d399': ['#34d399', '#60a5fa', '#f472b6'],
+  '#60a5fa': ['#60a5fa', '#f472b6', '#facc15'],
+  '#f59e0b': ['#facc15', '#60a5fa', '#f472b6'],
+  '#a78bfa': ['#f472b6', '#60a5fa', '#facc15'],
 };
 
 function ProjectCard({ project, index }: { project: typeof PROJECTS[0]; index: number }) {
   const [hovered, setHovered] = useState(false);
-  const colors = CARD_COLORS[project.color] ?? ['#818cf8', '#a78bfa', '#60a5fa'];
+  const colors = CARD_COLORS[project.color] ?? ['#60a5fa', '#f472b6', '#facc15'];
 
   return (
     <motion.div

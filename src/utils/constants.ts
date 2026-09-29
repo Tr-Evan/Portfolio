@@ -183,7 +183,7 @@ export const PASSIONS = [
     emoji: '📚',
     title: 'Apprentissage',
     subtitle: 'Nouvelles compétences, chaque jour',
-    description: 'Passionné par l\'apprentissage continu. J\'explore constamment de nouvelles technologies et méthodes pour améliorer mes compétences dans n\'importe quel domaine.',
+    description: 'Passionné par l\'apprentissage. J\'explore constamment de nouvelles technologies et méthodes pour améliorer mes compétences dans n\'importe quel sujet / domaine.',
     accent: '#22d3ee',
     size: 'large',
     pattern: 'grid',
@@ -214,8 +214,8 @@ export const PASSIONS = [
 export const TIMELINE = [
   {
     year: '2026',
-    title: 'Diplômé Master 2 Informatique',
-    company: 'EPITA Paris — spécialité Web & Mobile',
+    title: 'Diplômé Master Développeur Fullstack',
+    company: 'Sup de Vinci — Nantes',
     description: 'Mention Bien. Mémoire sur la génération de contenu IA pour l\'aide à la révision. Défense en juin 2026.',
     color: '#818cf8',
   },
@@ -250,13 +250,3 @@ export const NAV_LINKS = [
   { href: '#contact',  label: 'Contact'  },
 ];
 
-export const CMD_ACTIONS = [
-  { id: 'about',    label: 'En savoir plus sur moi',  icon: '👋', type: 'nav',    href: '#about' },
-  { id: 'projects', label: 'Voir mes projets',        icon: '📁', type: 'nav',    href: '#projects' },
-  { id: 'skills',   label: 'Voir ma stack',           icon: '⚡', type: 'nav',    href: '#skills' },
-  { id: 'contact',  label: 'Me contacter',            icon: '✉️', type: 'nav',    href: '#contact' },
-  { id: 'github',   label: 'Ouvrir GitHub',           icon: '🐙', type: 'link',   href: 'https://github.com/alex-renard' },
-  { id: 'linkedin', label: 'Ouvrir LinkedIn',         icon: '💼', type: 'link',   href: 'https://linkedin.com/in/alex-renard' },
-  { id: 'cv',       label: 'Télécharger le CV',       icon: '📄', type: 'action' },
-  { id: 'email',    label: "Copier l'adresse email",  icon: '📋', type: 'copy',   value: 'alex.renard@dev.io' },
-];

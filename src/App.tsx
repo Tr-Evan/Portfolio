@@ -1,4 +1,4 @@
-import { useEffect, useState, useCallback, lazy, Suspense } from 'react';
+import { useState } from 'react';
 import { motion } from 'framer-motion';
 import PageLoader from './components/PageLoader';
 import DockNav from './components/DockNav';
@@ -13,27 +13,11 @@ import GradualBlur from './components/react-bits/GradualBlur';
 import { useLenis } from './hooks/useLenis';
 import { useCustomCursor } from './hooks/useCustomCursor';
 
-const CommandBar = lazy(() => import('./components/CommandBar'));
-
 export default function App() {
   useLenis();
   useCustomCursor();
 
   const [loading, setLoading] = useState(true);
-  const [cmdOpen, setCmdOpen] = useState(false);
-  const openCmd  = useCallback(() => setCmdOpen(true),  []);
-  const closeCmd = useCallback(() => setCmdOpen(false), []);
-
-  useEffect(() => {
-    const handler = (e: KeyboardEvent) => {
-      if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
-        e.preventDefault();
-        setCmdOpen((v) => !v);
-      }
-    };
-    window.addEventListener('keydown', handler);
-    return () => window.removeEventListener('keydown', handler);
-  }, []);
 
   return (
     <>
@@ -58,10 +42,7 @@ export default function App() {
         transition={{ duration: 0.65, ease: [0.4, 0, 0.2, 1], delay: 0.05 }}
         className="relative"
       >
-        <DockNav onOpenCmd={openCmd} />
-        <Suspense fallback={null}>
-          <CommandBar open={cmdOpen} onClose={closeCmd} />
-        </Suspense>
+        <DockNav />
 
         <main>
           <HeroSection />

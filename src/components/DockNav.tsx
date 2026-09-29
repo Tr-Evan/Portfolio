@@ -1,13 +1,9 @@
 import { useEffect, useState, memo } from 'react';
 import { motion } from 'framer-motion';
-import { FiUser, FiCode, FiZap, FiHeart, FiMail, FiGithub, FiCommand } from 'react-icons/fi';
+import { FiUser, FiCode, FiZap, FiHeart, FiMail, FiGithub } from 'react-icons/fi';
 import Dock from './react-bits/Dock';
 
-interface DockNavProps {
-  onOpenCmd?: () => void;
-}
-
-function DockNav({ onOpenCmd }: DockNavProps) {
+function DockNav() {
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
@@ -25,15 +21,12 @@ function DockNav({ onOpenCmd }: DockNavProps) {
     { icon: <FiHeart size={16} style={{ color: 'rgba(255,255,255,0.7)' }} />,  label: 'Passions', onClick: () => go('passions') },
     // Visual separator — contact item styled with accent
     {
-      icon: <FiMail size={16} style={{ color: '#818cf8' }} />,
+      icon: <FiMail size={16} style={{ color: 'var(--primary)' }} />,
       label: 'Contact',
       onClick: () => go('contact'),
-      className: 'ring-1 ring-[#818cf8]/25 bg-[#818cf8]/[0.08]',
+      className: 'ring-1 ring-[var(--primary)]/25 bg-[var(--primary)]/[0.08]',
     },
     { icon: <FiGithub size={15} style={{ color: 'rgba(255,255,255,0.5)' }} />, label: 'GitHub', onClick: () => window.open('https://github.com/Tr-Evan', '_blank', 'noopener') },
-    ...(onOpenCmd
-      ? [{ icon: <FiCommand size={13} style={{ color: 'rgba(255,255,255,0.4)' }} />, label: '⌘K', onClick: onOpenCmd }]
-      : []),
   ];
 
   return (
